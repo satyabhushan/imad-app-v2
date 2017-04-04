@@ -80,11 +80,11 @@ position: absolute; top: 0; right: 15px; width: 80px;
     text-transform: uppercase;
 }
 .inoverflow{
-	padding: 40px;
-	font-size: 23px;
-	text-align: center;
-	color: #fdfdfd;
-	text-shadow: 1px 1px 3px #7a7a7a;
+    padding: 40px;
+    font-size: 23px;
+    text-align: center;
+    color: #929292;
+    text-shadow: 1px 1px 3px #ffffff;
 }
 @media only screen and (min-width: 831px) and (max-width: 1220px) {
 	.grid{
