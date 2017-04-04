@@ -587,11 +587,11 @@ function errordata(err){
 
 
 app.get('/profile/:id',function(req,res){
-    res.sendFile(path.join(__dirname, 'public', 'imad5.html'));
+    res.sendFile(path.join(__dirname, 'ui', 'imad5.html'));
 })
 
 app.get('/aboutme',function(req,res){
-    res.sendFile(path.join(__dirname, 'public', 'resume.html'));
+    res.sendFile(path.join(__dirname, 'ui', 'resume.html'));
 })
 
 var port = 8080; // Use 8080 for local development because you might already have apache running on 80
