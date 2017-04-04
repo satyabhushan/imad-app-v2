@@ -200,7 +200,7 @@
 	}
     
     if(!localStorage.me){
-        var pg = window.location.pathname.split('/')[1] || window.location.pathname.split('/')[1] != '' ? 'index' : window.location.pathname.split('/')[1];
+        var pg = window.location.pathname.split('/')[1] == undefined || window.location.pathname.split('/')[1] == '' ? 'index' : window.location.pathname.split('/')[1];
         console.log(pg)
 	    glb.submitanything('trackUserAction/'+pg);
 	}
