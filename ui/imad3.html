@@ -170,17 +170,19 @@ var glb = {};
     }
 
     function setHeader(userinfo){
+        var t=document.createElement('title')
     	if(glb.isloggedin()){
 	    	document.getElementsByClassName('ntloggedin')[0].style.display = 'none';
     		document.getElementsByClassName('ifloggedin')[0].style.display = 'block';
     		document.getElementsByClassName('loggedinusrpropic')[0].innerHTML = '<img src="'+userinfo.image+'" style="width:100%; height:100%;">';
     		document.getElementsByClassName('loggedinusrnm')[0].innerText = userinfo.name;
-    		//document.getElementById('lgot').href = 'http://satyabhushan.imad.hasura-app.io/logout/'+encodeURIComponent(window.location.href);
+    		t.innerText = userinfo.name+' | HOME';
     	}else {
 	    	document.getElementsByClassName('ntloggedin')[0].style.display = 'block';
     		document.getElementsByClassName('ifloggedin')[0].style.display = 'none';
+    		t.innerText = 'AwesomeBlog | HOME'
     	}
-
+    	 document.head.appendChild(t)
     }
 
     function loadart(data){
