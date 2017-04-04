@@ -1,0 +1,53 @@
+.formsal{
+    background:white;width:400px;position: relative;top: 20px;margin: auto;box-shadow: 0px 0px 9px -3px;
+}
+.formh{
+    text-align:center; padding:10px; font-size:25px;  background:orange; color:white; position:relative;
+}
+.mformpart{
+ 	padding:20px;
+}
+.nopt{
+    text-align:center;margin-top: 28px;margin-bottom: 10px;border-bottom: 1px dashed #ffa500;position: relative;color: orange; font-size: 20px
+}
+.nopt span{
+    position: absolute; background: white; padding: 0px 10px;
+}
+.ibtn{
+    font: inherit; border: none; outline: none; width: 100%; padding: 10px; border-bottom: 1px solid #b3b3b3; box-sizing: border-box; margin-top: 15px;
+}
+.ibtn:hover{
+    border-color:#525252;
+}
+.ibtn:focus{
+    border-color:orange;
+}
+.sbtn{
+    font: inherit; border: none; outline: none; width: 100%; padding: 10px; box-sizing: border-box; margin-top: 15px; background: cadetblue; color: white; border-radius: 5px; cursor:pointer;
+}
+.sbtn:hover{
+    background:#589092;
+}
+.loginform{
+    display:none;
+}
+.formsal{
+    display:none; overflow:hidden; border-radius:5px;
+}
+.intmvlogsign{
+    opacity:0.7; margin-top:15px;
+}
+.intmvlogsign:hover{
+    opacity:0.85; cursor:pointer;
+}
+.fb-login{
+	width:100%;padding:10px;height: 44px;box-sizing: border-box;margin-top: 15px;background: #39579b;color:white;position: relative;box-shadow: 0 2px 4px 0 rgba(0,0,0,.25);border: 1px solid #2d4782; transition: background-color .218s,border-color .218s,box-shadow .218s; cursor:pointer;
+}
+.fb-login:hover{
+	box-shadow:0 2px 4px 0 rgb(114, 135, 183)
+}
+@media only screen and (max-width: 450px) {
+    .formsal{
+    	width: 320px;
+    }
+}

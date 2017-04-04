@@ -1,0 +1,49 @@
+		.dvlprinfo{
+			background: #3c3c3e; padding: 20px;
+		}
+		.dvlprinfoc{
+			width: 829px;margin: auto;overflow: hidden;
+		}
+		.dvlprlnkh{
+			color: white;text-align: center;
+		}
+		.dvlprlnkp{
+			position:relative;overflow: hidden;padding: 10px;box-sizing: border-box;
+		}
+		.dvlprlnkimgp{
+			position:relative;width: calc(50% - 50px);float: left;margin: 25px;box-sizing: border-box;
+		}
+		.dvlprlnkimg{
+			display: inline-block;vertical-align: middle;position: relative;width: 45px;height: 45px;background: #e03247;border-radius: 50%;padding: 10px;box-sizing: border-box;fill: #3c3c3e;position: absolute;top: 50%;transform: translateY( -50% );
+		}
+		.cntctwbadd{
+			display: inline-block;vertical-align: middle;color: #8e8e8e;margin-left: 60px;width: calc(100% - 60px);position: relative;word-break: break-all; font-size: 18px;
+		}
+		.dvlprun{
+			margin:20px auto;margin-bottom: 40px;width: 135px;border-bottom: 1px solid #a0a0a0;
+		}
+		.dvlpnm{
+			text-align: center;color: #8e8e8e;font-size: 15px;width: 75%;margin: 20px auto;
+		}
+		.dvlpnm a{
+			text-decoration: underline; color: bisque;
+		}
+		.dvlprmail{
+			margin-top: 10px;font-size: 13px;color: grey;
+		}
+		@media only screen and (max-width: 860px) {
+			.dvlprinfoc{
+				width: 100%;
+			}
+			.dvlprlnkimgp{
+				margin: 45px auto; float:none;
+			}
+		}
+		@media only screen and (max-width: 860px){
+			.dvlprlnkp{
+				text-align: center; width: 324px; margin: auto;
+			}
+			.dvlprlnkimgp{
+				width: auto; display: inline-block; margin: 20px;
+			}
+		}

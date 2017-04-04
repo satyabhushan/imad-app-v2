@@ -1,0 +1,106 @@
+.mm{
+position: relative; background: #f5f5f5; top: 50px;
+}
+.mid{
+position: relative; margin: auto;
+}
+.arts{
+	overflow: hidden;
+}
+.artimg{
+height:250px; width: 100%; overflow: hidden; background-position: center; background-size: cover; position: relative;
+}
+.arttit{
+padding:15px 20px; position: relative;
+}
+.artit{
+font-size: 25px; font-weight: bold; color: #3e3e3e;
+}
+.artres{
+position: absolute; top: 0; right: 15px; width: 80px;
+}
+.artcover{
+    background:linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 80%,  rgba(0, 0, 0, 0.2) 90%, rgba(0, 0, 0, 0.7) 100%); position: absolute; height: 100%; width:100%; top:0; right:0;
+}
+.artcover:hover{
+	background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.25) 80%,  rgba(0, 0, 0, 0.4) 90%, rgba(0, 0, 0, 0.8) 100%); transition: all 0.4s;
+}
+.arttagp{
+    position: absolute; bottom: 0; left: 0px; width: 100%; padding:10px 20px; box-sizing: border-box;
+}
+.article .inarticle{
+    background: #D8D6D2; border-radius: 8px; overflow: hidden;
+}
+.inarticle:hover .arttit{
+	background: white; transition: all 0.4s;
+}
+.tags{
+    margin-right:3px;display: inline-block;color:white;text-align: center;padding: 5px 10px;border: 1px solid;border-radius: 4px;font-size: 13px;
+}
+.tags:hover{
+	background: rgba(255,255,255,0.2); transition: all 0.3s;
+}
+.container{
+	padding: 30px 20px;
+    box-sizing: border-box;
+}
+.grid {
+  background: #EEE;
+  max-width: 1200px;
+  margin: auto;
+	width: 1200px;
+}
+.grid:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+.grid-item{
+	width:400px;
+}
+.grid-item1{
+	width:100%;
+}
+.grid-item2{
+	width:800px;
+}
+.grid-item{
+	padding:10px; box-sizing: border-box;
+}
+.inhead{
+	padding: 20px;
+    box-sizing: border-box;
+    font-size: 33px;
+    font-weight: bold;
+    text-align: center;
+    color: #D26;
+    border-radius: 8px;
+    background: #D8D6D2;
+    text-transform: uppercase;
+}
+.inoverflow{
+	padding: 40px;
+	font-size: 23px;
+	text-align: center;
+	color: #fdfdfd;
+	text-shadow: 1px 1px 3px #7a7a7a;
+}
+@media only screen and (min-width: 831px) and (max-width: 1220px) {
+	.grid{
+		width: 800px; margin: auto;
+	}
+}
+@media only screen and (max-width: 830px) {
+	.grid{
+		width: 600px;
+	}
+	.grid-item{
+		width:100% !important;
+	}
+}
+@media only screen and (min-width: 230px) and (max-width: 630px) {
+	.grid{
+		width: calc(100% - 25px); margin: auto;
+	}
+}

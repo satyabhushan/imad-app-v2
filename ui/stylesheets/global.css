@@ -1,0 +1,80 @@
+body{
+margin: 0; font-family: lato; font-size: 16px; color: #272727;
+}
+header{
+position: fixed; width:100%; height:60px; background: linear-gradient(-60deg, #7b73ad 0%, #f9f9f9 100%); background: #36465d; z-index: 900; box-shadow:0px 1px 5px 0px rgba(54, 70, 93, 0.46);
+}
+.vm{
+position: relative; width:85px; display: inline-block; vertical-align: middle;
+}
+.incenter{
+position: relative; top:50%; left:50%; transform: translate( -50% , -50% );
+}
+a{
+color:inherit; text-decoration:none; 
+}
+.ldng{
+ position: absolute; top: 0; left: 0; bottom: 0; width: 100%;
+}
+.ldng > .loading{
+ list-style: none; margin: 0; padding: 0; position: absolute; top: 50%; left: 50%; -webkit-transform: translate(-50%, -50%); transform: translate(-50%, -50%);
+}
+.loading li {
+height: 0; position: absolute; top: 50%; left: 0; width: 0; margin: 0; height: 20px; width: 20px; border-radius: 100%; -webkit-transform: transformZ(0); transform: transformZ(0); -webkit-animation: LOADING 2s infinite; animation: LOADING 2s infinite; background: rgba(0,0,0,0.7)
+}
+.loading li:nth-child(1n) {
+ left: -25px; -webkit-animation-delay: 0s; animation-delay: 0s;
+}
+.loading li:nth-child(2n) {
+  left: 0; -webkit-animation-delay: 0.2s; animation-delay: 0.2s;
+}
+.loading li:nth-child(3n) {
+ left: 25px; -webkit-animation-delay: 0.4s; animation-delay: 0.4s;
+ }
+ @-webkit-keyframes LOADING {
+  0% {
+	-webkit-transform: scale(0.5);
+			transform: scale(0.5);
+	//background: #2b8ccd;
+  }
+  50% {
+	-webkit-transform: scale(1);
+			transform: scale(1);
+	//background: white;
+  }
+  100% {
+	-webkit-transform: scale(0.5);
+			transform: scale(0.5);
+	//background: #2b8ccd;
+  }
+}
+ @keyframes LOADING {
+  0% {
+	-webkit-transform: scale(0.5);
+			transform: scale(0.5);
+	//background: #2b8ccd;
+  }
+  50% {
+	-webkit-transform: scale(1);
+			transform: scale(1);
+	//background: white;
+  }
+  100% {
+	-webkit-transform: scale(0.5);
+			transform: scale(0.5);
+	//background: #2b8ccd;
+  }
+}
+
+.uninoti{
+	position: fixed;width: 320px;background: #4b9aff;bottom: -150px;left: 20px;font-size: 22px;color: white;padding: 15px;border: 1px solid #368eff;z-index: 1000;box-shadow: 0px 0px 10px -2px black;border-radius: 3px; opacity:1;
+}
+.shownoti{
+	bottom: 10px; transition: bottom 0.2s;
+}
+.hidenoti{
+	bottom: 150px; opacity: 0; transition: bottom 0.2s, opacity 0.2s;
+}
+.uniclose{
+display: none; position: absolute;height: 13px;width: 13px;top: 5px;padding: 4px;right: 5px;fill:white;border-radius: 50%;border: 2px solid white; cursor: pointer;
+}
