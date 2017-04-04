@@ -66,9 +66,9 @@ function islogin(req){
 }
 
 app.get('/trackUserAction/:url',function(req,res){
-    console.log(req.connection.remoteAddress);
+    console.log(req.connection.remoteAddress,  req.headers['x-forwarded-for'] );
     var url = req.params.url;
-    var ip =  request.headers['x-forwarded-for'] 
+    var ip =  req.headers['x-forwarded-for'] 
     if(ip){
         pool.query('Select * from "visiters" where userip = $1',[ip],function(err,result){
             if(err){
