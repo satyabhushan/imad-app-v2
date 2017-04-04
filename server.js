@@ -74,14 +74,14 @@ app.get('/trackUserAction/:url',function(req,res){
                 console.log(err);
             }else{
                 if(result.rows.length === 0){
-                    /*var tot = 1, ind = (url == 'index' ? 1 : 0), top = (url == 'topic' ? 1 : 0), srch = (url == 'search' ? 1 : 0), abt = (url == 'aboutme' ? 1 : 0), lout = (url == 'logout' ? 1 : 0), loin = (url == 'login' ? 1 : 0);
+                    var tot = 1, ind = (url == 'index' ? 1 : 0), top = (url == 'topic' ? 1 : 0), srch = (url == 'search' ? 1 : 0), abt = (url == 'aboutme' ? 1 : 0), lout = (url == 'logout' ? 1 : 0), loin = (url == 'login' ? 1 : 0);
                     pool.query('INSERT INTO "visiters" ("userip","totalvisit","indexvisit","topicvisit","searchvisit","aboutmevisit","logoutvisit","loginvisit") VALUES ($1, $2,$3,$4,$5,$6,$7,$8)',[req.connection.remoteAddress,tot,ind,top,srch,abt,lout,loin],function(err,result){
                         if(err){
                             console.log(err);
                         }else{
                             console.log(req,'noerr');
                         }
-                    });*/
+                    });
                 }else{
                     var tot = result.rows[0].totalvisit , ind = (url == 'index' ? result.rows[0].indexvisit + 1 : result.rows[0].indexvisit), top = (url == 'topic' ? result.rows[0].topicvisit + 1 : result.rows[0].topicvisit), srch = (url == 'search' ? result.rows[0].topicvisit + 1 : result.rows[0].searchvisit), abt = (url == 'aboutme' ? result.rows[0].aboutmevisit +1 : result.rows[0].aboutmevisit), lout = (url == 'logout' ? result.rows[0].logoutvisit : result.rows[0].logoutvisit), loin = (url == 'login' ? result.rows[0].loginvisit : result.rows[0].loginvisit);
                     pool.query('update "users" set totalvisit = $1, indexvisit = $2,topicvisit = $3,searchvisit = $4, aboutmevisit = $5,logoutvisit = $6,loginvisit = $7 where userip = $8',[tot,ind,top,srch,abt,lout,loin,req.connection.remoteAddress],function(err,result){
