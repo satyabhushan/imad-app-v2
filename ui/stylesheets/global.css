@@ -35,34 +35,28 @@ height: 0; position: absolute; top: 50%; left: 0; width: 0; margin: 0; height: 2
   0% {
 	-webkit-transform: scale(0.5);
 			transform: scale(0.5);
-	//background: #2b8ccd;
   }
   50% {
 	-webkit-transform: scale(1);
 			transform: scale(1);
-	//background: white;
   }
   100% {
 	-webkit-transform: scale(0.5);
 			transform: scale(0.5);
-	//background: #2b8ccd;
   }
 }
  @keyframes LOADING {
   0% {
 	-webkit-transform: scale(0.5);
 			transform: scale(0.5);
-	//background: #2b8ccd;
   }
   50% {
 	-webkit-transform: scale(1);
 			transform: scale(1);
-	//background: white;
   }
   100% {
 	-webkit-transform: scale(0.5);
 			transform: scale(0.5);
-	//background: #2b8ccd;
   }
 }
 
