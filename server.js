@@ -76,7 +76,7 @@ app.get('/trackUserAction/:url',function(req,res){
             }else{
                 if(result.rows.length === 0){
                     var tot = 1, ind = (url == 'index' ? 1 : 0), top = (url == 'topic' ? 1 : 0), srch = (url == 'search' ? 1 : 0), abt = (url == 'aboutme' ? 1 : 0), lout = (url == 'logout' ? 1 : 0), loin = (url == 'login' ? 1 : 0);
-                    pool.query('INSERT INTO "visiters" ("userip","totalvisit","indexvisit","topicvisit","searchvisit","aboutmevisit","logoutvisit","loginvisit") VALUES ($1, $2,$3,$4,$5,$6,$7,$8)',[i[],tot,ind,top,srch,abt,lout,loin],function(err,result){
+                    pool.query('INSERT INTO "visiters" ("userip","totalvisit","indexvisit","topicvisit","searchvisit","aboutmevisit","logoutvisit","loginvisit") VALUES ($1, $2,$3,$4,$5,$6,$7,$8)',[ip,tot,ind,top,srch,abt,lout,loin],function(err,result){
                         if(err){
                             console.log(err);
                         }else{
