@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!--<script src="https://apis.google.com/js/platform.js" async defer></script>
+<meta name="google-signin-client_id" content="6592700229-sq2acbb8tqqgehqm8agvmrp5io4gj1u5.apps.googleusercontent.com">-->
+<script src="https://apis.google.com/js/api:client.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css?family=Lora|Open+Sans:800" rel="stylesheet">
+<link href="http://satyabhushan.imad.hasura-app.io/stylesheets/global.css" rel="stylesheet">
+<link href="http://satyabhushan.imad.hasura-app.io/stylesheets/header.css" rel="stylesheet">
+<link href="http://satyabhushan.imad.hasura-app.io/stylesheets/footer.css" rel="stylesheet">
+<link href="http://satyabhushan.imad.hasura-app.io/stylesheets/login-sign-form.css" rel="stylesheet">
+</head>
+<body>
+
+<style type="text/css">
+
+</style>
+
+<header class="header-login-signup">
+
+	<div class="header-limiter">
+
+		<h1><a href="http://satyabhushan.imad.hasura-app.io">Awesome<span>Blog</span></a></h1>
+
+		<nav>
+			<a href="http://satyabhushan.imad.hasura-app.io">Home</a>
+			<a href="http://satyabhushan.imad.hasura-app.io/aboutme">About me</a>
+		</nav>
+
+		<ul class="logsig ntloggedin" style="display: none;">
+			<li><a href="#" id="uslogin">Login</a></li>
+			<li><a href="#" id="ussignup" style="color: white;">Sign up</a></li>
+		</ul>
+
+		<div class="header-user-menu ifloggedin" style="color: white; display: none;">
+			<div class="loggedinusrpropic"></div>
+
+			<ul>
+				<li><a href="#" class="loggedinusrnm">Satya</a></li>
+				<li><a href="#" id="logoutbtn">Logout</a></li>
+			</ul>
+		</div>
+
+	</div>
+
+</header>
+
+<style>
+    .tcon{
+        position: relative; top:50px;
+    }
+    .artheader{
+        height:350px; width: 100%; overflow: hidden; background-position: center; background-size: cover; position: relative;
+    }
+    .arthdr{
+        background:linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.3) 80%,  rgba(0, 0, 0, 0.3) 90%, rgba(0, 0, 0, 0.7) 100%); position: relative; height: 100%;
+    }
+    .arttitandtag{
+        width: 650px;margin: auto;height: 100%;position: relative;
+    }
+    .arttit{
+        text-align: center; color: white; font-family: 'Open Sans', sans-serif; text-transform:uppercase; font-size: 40px; font-weight: 800;   
+    }
+    .tagcon{
+        position: absolute; bottom: 0; left: 0px; width: 100%; padding:10px 20px; box-sizing: border-box;
+    }
+    .arttag{
+        margin-right:3px;display: inline-block;color:white;text-align: center;padding: 5px 12px;border: 1px solid;border-radius: 4px;font-size: 15px;font-family: 'open sans';
+    }
+    .arttag:hover{
+    	background: rgba(255,255,255,0.4); transition: all 0.4s;
+    }
+    .artresanddes{
+        margin: auto; width:650px; padding: 20px; box-sizing: border-box;
+    }
+    .reviews{
+        height: 50px;
+    }
+    .noofres{
+        display: inline-block; vertical-align: middle; font:32px 'open sans'; padding:0 10px; 
+    }
+    .artdes{
+        font-size: 20px; line-height: 1.6em;
+    }
+    .artdes img{
+        width:100%;
+    }
+    .artdes iframe{
+        width:100%;
+    }
+    @media only screen and (max-width: 1060px) {
+		.mediarow{
+			width:calc(100% - 100px);
+		}
+	}
+	@media only screen and (max-width: 650px) {
+		.arttitandtag{
+			width: 100%;
+		}
+	}
+	@media only screen and (max-width: 550px) {
+		.artresanddes{
+			width:auto;
+		}
+		.arttit{
+			font-size: 25px;
+		}
+	}
+	@media only screen and (max-width: 550px) {
+		.tcon{
+			top:80px;
+		}
+		.loggedinusrnm{
+			font-size: 16px;
+		}
+	}
+</style>
+<style>
+    .head{
+        margin: 20px 0;font-size: 22px;font-weight: bold;
+    }
+    .writeresprev{
+        padding: 15px;position: relative;height: 50px;background: rgba(204, 204, 204, 0.07);border-radius: 5px;box-shadow: 1px 1px 6px -3px #7d7d7d;margin-bottom: 20px;cursor: pointer;border: 1px solid #f5f5f5;
+    }
+    .writepr{
+        display: inline-block;vertical-align: middle;width: 25px;margin-right: 15px;
+    }
+    .writetxt{
+        display: inline-block;vertical-align: middle;font-size: 20px;
+    }
+    .writeres{
+        display: none; padding: 15px; position: relative; background: rgba(204, 204, 204, 0.07);border-radius: 5px;box-shadow: 1px 1px 6px -3px #7d7d7d; margin-bottom: 20px; border: 1px solid #f5f5f5;
+    }
+    .writehere{
+        min-height: 50px;background:white;padding: 15px;border: 1px solid #e1e1e1;
+    }
+    .clicktopost{
+        display: inline-block; padding: 7px 20px; background: #34a1ef; color: white; font-weight: bold; margin-top: 14px; border-radius: 5px; cursor: pointer;
+    }
+    .artcom{
+        padding: 15px;position: relative;min-height: 50px;background: rgba(204, 204, 204, 0.07);border-radius: 5px;border: 1px solid #f5f5f5;box-shadow: 1px 1px 6px -3px #7d7d7d;margin-bottom: 20px;
+    }
+    .comtrpiccon{
+        position: absolute; height: 50px; width: 50px; border-radius: 50%; top:15px; left:15px; overflow: hidden;
+    }
+    .comtrpic{
+        width: 100%; height: 100%;
+    }
+    .comnmandcom{
+        width:calc(100% - 50px); margin-left: 65px;
+    }
+    .comnm{
+        font-weight: bold; 
+    }
+    .comcom{
+        margin-top: 7px;
+    }
+    .reviewp{
+    	cursor: pointer;-webkit-user-select: none; -moz-user-select: none; -khtml-user-select: none; -ms-user-select: none;
+    }
+    .reviewp > svg{
+    	stroke-width:3;display: inline-block;vertical-align: middle;width: 40px;transform: scale(1); fill: none;stroke: #545454;
+    }
+    .likesp[data-liked="false"] > svg{
+    	fill: none;stroke: #545454; transition: fill 0.5s, stroke 0.5s;
+    }
+    .likesp[data-liked="true"] > svg{
+    	fill: rgb(255, 58, 58); stroke: rgb(255, 58, 58); transition: transform 0.3s;
+    }
+    .midclass > svg{
+    	transform: scale(1.5);transition: transform 0.4s,fill 0.2s, stroke 0.2s;
+    }
+    .cmtp[data-commented="false"] > svg{
+    	fill: none;stroke: #545454; transition: fill 0.5s, stroke 0.5s;
+    }
+    .cmtp[data-commented="true"] > svg{
+    	fill:#139622; stroke: #139622; transition: fill 0.5s, stroke 0.5s;
+    }
+   
+</style>
+<div class="tcon">
+	<!--<div class="g-signin2" data-onsuccess="onSignIn"></div>
+	<a href="#" onclick="signOut();">Sign out</a>-->
+	<div class="artcon">
+		<div class="artheader">
+			<div class="arthdr">
+				<div class="arttitandtag">
+					<div class="incenter arttit">Its an article right now.</div>
+					<div class="tagcon">
+						<div class="arttag">Follow</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div>
+			<div class="artresanddes">
+				<div class="reviews">
+					<div class="vm likesp reviewp" style="border-right: 1px solid #ccc;padding-right: 5px;margin-right: 10px;">
+						<!--<svg version="1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"  style="display: inline-block; vertical-align: middle; width: 40px;"><path d="M16 30.3c-31.1-17-8.6-38 0-23.8 8.6-14.3 31.1 6.8 0 23.8z"/></svg>-->
+						<svg version="1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"></style><path d="M16 28.9C-12.1 13.6 8.2-5.5 16 7.3c7.8-12.8 28.1 6.3 0 21.6z"/></svg>
+						<div id="likes" class="noofres" style="color: #545454">24</div>
+					</div>
+					<div class="vm cmtp reviewp">
+						<!--<svg version="1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" style="display: inline-block; vertical-align: middle; width: 40px;"><path d="M30.5 31.7c-.1 0-.3 0-.4-.1l-5.8-2c-.3-.1-.7-.1-1 .1-2.8 1.5-6.1 2.2-9.3 1.8C6.8 30.7 1 24.8.3 17.6-.2 12.9 1.4 8.3 4.7 5 8 1.7 12.5 0 17.2.4c7.1.6 13 6.1 14.1 13.1.5 3.1.1 6.3-1.3 9.2-.1.3-.2.6-.1.9l1.9 6.6c.1.5 0 1-.4 1.3-.3.1-.6.2-.9.2zM15.9 2.3c-3.7 0-7.2 1.5-9.8 4.1-2.9 2.9-4.3 6.9-3.8 11 .6 6.3 5.7 11.4 12 12.1 2.8.3 5.6-.2 8.1-1.6.8-.4 1.7-.5 2.6-.2l4.6 1.6-1.6-5.2c-.2-.7-.2-1.6.2-2.3 1.2-2.5 1.6-5.3 1.1-8-.9-6.2-6.1-11-12.3-11.5h-1.1z"/></svg></svg>-->
+						<svg version="1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path class="st0" d="M16 2.5C8.1 2.5 1.7 8.2 1.7 15.3c0 2.5.8 4.9 2.3 6.9-.3 3.1-1 5.4-2.1 6.5-.1.1-.2.4-.1.5.1.2.2.3.4.3h.1c.2 0 4.7-.7 7.9-2.5 1.8.7 3.8 1.1 5.8 1.1 7.9 0 14.3-5.8 14.3-12.8S23.9 2.5 16 2.5z"/></svg>
+						<div id="comments" class="noofres" style="color: #545454">24</div>
+					</div>
+				</div>
+				<div class="">
+					<div class="artdes"></div>
+				</div>
+				<div class="" style="margin-top: 30px; border-top:1px solid #ccc;">
+					<div class="head">Responses</div>
+					<div class="">
+						<div  style="position:relative; margin-bottom20px;">
+							<div class="writeresprev">
+								<div class="incenter">
+									<div class="writepr">
+										<svg version="1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.5 31.7c-.1 0-.3 0-.4-.1l-5.8-2c-.3-.1-.7-.1-1 .1-2.8 1.5-6.1 2.2-9.3 1.8C6.8 30.7 1 24.8.3 17.6-.2 12.9 1.4 8.3 4.7 5 8 1.7 12.5 0 17.2.4c7.1.6 13 6.1 14.1 13.1.5 3.1.1 6.3-1.3 9.2-.1.3-.2.6-.1.9l1.9 6.6c.1.5 0 1-.4 1.3-.3.1-.6.2-.9.2zM15.9 2.3c-3.7 0-7.2 1.5-9.8 4.1-2.9 2.9-4.3 6.9-3.8 11 .6 6.3 5.7 11.4 12 12.1 2.8.3 5.6-.2 8.1-1.6.8-.4 1.7-.5 2.6-.2l4.6 1.6-1.6-5.2c-.2-.7-.2-1.6.2-2.3 1.2-2.5 1.6-5.3 1.1-8-.9-6.2-6.1-11-12.3-11.5h-1.1z"/></svg></svg>
+									</div>
+									<div class="writetxt">Write your response.</div>
+								</div>
+							</div>
+							<div class="writeres">
+								<div class="writehere" contenteditable="true"></div>
+								<div class="clicktopost">Post</div>
+							</div>
+						</div>
+						
+						<div class="concomment">
+							<!--<div class="artcom">
+							</div>-->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="artmore">
+		
+	</div>
+
+
+	<div class="dvlprinfo">
+		<div class="dvlprinfoc">
+			<div class="dvlprlnkh">CONTACT ME</div>
+			<div class="dvlprlnkp">
+				<div class="dvlprlnkimgp">
+					<div class="dvlprlnkimg" style="padding: 0; background: none;">
+						<svg version="1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M16 .2C7.2.2.1 7.3.1 16.1c0 7 4.6 13 10.9 15.1.8.1 1.1-.3 1.1-.8v-3c-4.4 1-5.4-1.9-5.4-1.9-.7-1.8-1.8-2.3-1.8-2.3-1.4-1 .1-1 .1-1 1.6.1 2.4 1.6 2.4 1.6 1.4 2.4 3.7 1.7 4.6 1.3.1-1 .6-1.7 1-2.1-3.5-.4-7.3-1.8-7.3-7.9 0-1.7.6-3.2 1.6-4.3-.2-.4-.7-2 .2-4.2 0 0 1.3-.4 4.4 1.6 1.3-.4 2.6-.5 4-.5s2.7.2 4 .5c3-2.1 4.4-1.6 4.4-1.6.9 2.2.3 3.8.2 4.2 1 1.1 1.6 2.5 1.6 4.3 0 6.1-3.7 7.5-7.3 7.9.6.5 1.1 1.5 1.1 2.9v4.4c0 .4.3.9 1.1.8C27.3 29 31.9 23 31.9 16 31.9 7.3 24.8.2 16 .2z" style="fill: #e03247;"></path><path d="M6.1 23c0 .1-.2.1-.3 0-.1-.1-.2-.2-.1-.2 0-.1.2-.1.3 0 .1 0 .2.2.1.2zm-.2-.1M6.8 23.8c-.1.1-.2 0-.3-.1-.1-.1-.1-.3 0-.3.1-.1.2 0 .3.1v.3zm-.2-.2M7.4 24.7c-.1.1-.3 0-.4-.1-.1-.1-.1-.3 0-.4.1-.1.3 0 .4.1.1.1.1.3 0 .4zm0 0M8.2 25.6c-.1.1-.3.1-.4-.1-.1-.1-.2-.3-.1-.4.1-.1.3-.1.5 0 .1.2.1.4 0 .5zm0 0M9.4 26.1c0 .1-.2.2-.4.1s-.3-.2-.3-.3c0-.1.2-.2.4-.1.3 0 .4.1.3.3zm0 0M10.7 26.2c0 .1-.1.2-.3.2-.2 0-.3-.1-.3-.2s.1-.2.3-.2c.2-.1.3 0 .3.2zm0 0M11.9 26c0 .1-.1.3-.3.3-.2 0-.4 0-.4-.2 0-.1.1-.3.3-.3.3-.1.4 0 .4.2zm0 0" style="fill: #e03247;"></path></svg>
+					</div>
+					<div class="cntctwbadd"><a href="http://github.com/satyabhushan" target="_blank">github.com/satyabhushan</a></div>
+				</div>
+				<div class="dvlprlnkimgp">
+					<div class="dvlprlnkimg">
+						<svg version="1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M25.1 28.9v-8.4h2.8v11.1H2.8V20.5h2.8v8.4z"/><path d="M8.6 19.7l13.7 2.9.6-2.7-13.7-3-.6 2.8zm1.9-6.5l12.6 5.9 1.2-2.5-12.6-5.9-1.2 2.5zM14 7l10.7 8.9 1.8-2.1-10.8-9L14 7zM20.9.4L18.7 2 27 13.2l2.2-1.7L20.9.4zM8.4 26h13.9v-2.8H8.4V26z"/></svg>
+					</div>
+					<div class="cntctwbadd"><a href="http://stackoverflow.com/users/4981754/budding-programmer" target="_blank">stackoverflow.com/users/4981754/budding-programmer</a></div>
+				</div>
+				<div class="dvlprlnkimgp">
+					<div class="dvlprlnkimg">
+						<svg version="1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M31.9 19.4v11.8h-6.8v-11c0-2.8-1-4.6-3.5-4.6-1.9 0-3 1.3-3.5 2.5-.2.4-.2 1.1-.2 1.7v11.5h-6.8s.1-18.6 0-20.6h6.8v3-.1c.9-1.4 2.5-3.4 6.2-3.4 4.5 0 7.8 2.9 7.8 9.2zM3.9.8C1.6.8 0 2.3 0 4.3s1.5 3.6 3.8 3.6c2.4 0 3.9-1.6 3.9-3.6S6.3.8 3.9.8zM.5 31.2h6.8V10.7H.5v20.5z"/></svg>
+					</div>
+					<div class="cntctwbadd"><a href="https://www.linkedin.com/in/satyabhushan-gupta" target="_blank">linkedin.com/in/satyabhushan-gupta</a></div>
+				</div>
+				<div class="dvlprlnkimgp">
+					<div class="dvlprlnkimg">
+						<svg version="1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M10.12 28.84c11.9 0 18.5-9.9 18.5-18.5v-.8c1.3-.9 2.4-2.1 3.2-3.4-1.2.5-2.4.9-3.7 1 1.3-.8 2.4-2.1 2.9-3.6-1.3.7-2.6 1.3-4.1 1.6-1.2-1.3-2.9-2-4.7-2-3.6 0-6.5 2.9-6.5 6.5 0 .5.1 1 .2 1.5-5.4-.3-10.2-2.9-13.4-6.8-.6 1-.9 2.1-.9 3.3 0 2.3 1.1 4.2 2.9 5.4-1.1 0-2.1-.3-2.9-.8v.1c0 3.1 2.2 5.8 5.2 6.4-.5.1-1.1.2-1.7.2-.4 0-.8 0-1.2-.1.8 2.6 3.2 4.5 6.1 4.5-2.2 1.7-5 2.8-8.1 2.8-.5 0-1 0-1.5-.1 2.6 1.7 6.1 2.8 9.7 2.8"/></svg>
+					</div>
+					<div class="cntctwbadd"><a href="https://twitter.com/satyabhushangu1" target="_blank">twitter.com/satyabhushangu1</a></div>
+				</div>
+			</div>
+		</div>
+		<div class="dvlprun"></div>
+		<div class="dvlpnm"><div>Develop and Design by <a href="https://discourse.imad.hasura.io/users/satyabhushan_gupta/activity">Satyabhushan Gupta</a></div>
+		<div class="dvlprmail">Email Id: <a href="mailto:satya73989@gmail.com">satya73989@gmail.com</a></div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+(function(){
+	// client-id:  6592700229-sq2acbb8tqqgehqm8agvmrp5io4gj1u5.apps.googleusercontent.com 
+	// client-secret:  4e77bonMXiwqe7XH3qFwYl4b
+})()
+</script>
+<script type="text/javascript">
+var glb = {};
+(function(){
+
+	var loggedin = false,lcl = {nol:0,noc:0,commented:false,liked:false,lstcomid:-1};
+
+	glb.isloggedin = function(){
+        return loggedin;
+    }
+
+    function setHeader(userinfo){
+    	if(glb.isloggedin()){
+	    	document.getElementsByClassName('ntloggedin')[0].style.display = 'none';
+    		document.getElementsByClassName('ifloggedin')[0].style.display = 'block';
+    		document.getElementsByClassName('loggedinusrpropic')[0].innerHTML = '<img src="'+userinfo.image+'" style="width:100%; height:100%;">';
+    		document.getElementsByClassName('loggedinusrnm')[0].innerText = userinfo.name;
+    		//document.getElementById('lgot').href = 'http://satyabhushan.imad.hasura-app.io/logout/'+encodeURIComponent(window.location.href);
+    	}else {
+	    	document.getElementsByClassName('ntloggedin')[0].style.display = 'block';
+    		document.getElementsByClassName('ifloggedin')[0].style.display = 'none';
+    	}
+
+    }
+    var global = {};
+	function loadArt(data){
+        data = JSON.parse(data);
+        loggedin = data.meta.loggedin;
+        glb.userInfo = data.meta.userInfo;
+        setHeader(glb.userInfo);
+        data = data.otherdata;
+        if(!data.err){
+		    global.artid=data.artid;
+		    document.getElementsByClassName('arttit')[0].innerHTML = data.arttit;
+		    var f = document.createElement('div');
+		    f.innerHTML = data.artdes;
+		    var d = document.createElement('img');
+		    d.src = 'https://s22.postimg.org/h3bbc2ejl/cover_image_generic.jpg';
+		    d = f.getElementsByTagName('img')[0] || d ;
+		    document.getElementsByClassName('artheader')[0].style.backgroundImage = 'url("'+d.src+'")';
+		    var msg = '';
+		    for(var i=0;i<data.tags.length;i++){
+		        msg += '<div class="arttag"><a href="http://satyabhushan.imad.hasura-app.io/search/'+data.tags[i].tagname+'">'+data.tags[i].tagname+'</a></div>'
+		    }
+		    document.getElementsByClassName('tagcon')[0].innerHTML = msg;
+		    document.getElementById('likes').innerHTML = data.nooflikes;
+		    lcl.liked = data.mylk;
+		    document.getElementById('likes').parentNode.setAttribute('data-liked',data.mylk);
+		    document.getElementById('comments').innerHTML = data.noofcomments;
+		    lcl.commented = data.mycom, lcl.noc = data.noofcomments, lcl.nol = data.nooflikes;
+		    document.getElementById('comments').parentNode.setAttribute('data-commented',data.mycom);
+		    document.getElementsByClassName('artdes')[0].innerHTML = data.artdes;
+	        lcl.lstcomid = data[0] ? data[0].comid : -1;
+	        glb.submitanything('988?artid='+global.artid+'&lstcomid='+lcl.lstcomid,loadComm)
+	        var m=document.getElementsByClassName('overpg')[0];
+	        m.style.display='none';
+   	 	}else{
+   	 		document.getElementsByClassName('overpg')[0].innerHTML = data.errdata
+    	}
+	}
+	
+	function loadComm(data){
+		req=false;
+		data = JSON.parse(data);
+		if(data.err){
+			glb.shownoti(data.errdes,2000,'y')
+		}else{
+			lcl.noc = data.noc || lcl.noc, lcl.commented = data.mycom || lcl.commented;
+			document.getElementById('comments').innerHTML = lcl.noc;
+			document.getElementById('comments').setAttribute('data-commented',lcl.commented);
+			data = data.otherdata;
+			var msg = '';
+			for(var i=0;i<data.length;i++){
+			    msg += '<div class="artcom" data-comid="'+data[i].comid+'"><div class="comtrpiccon"><img class="comtrpic" src="'+data[i].userpic+'"></div><div class="comnmandcom"><div class="comnm">'+data[i].username+'</div><div class="comcom">'+data[i].comment+'</div></div></div>';
+			}
+			document.getElementsByClassName('concomment')[0].innerHTML = msg + document.getElementsByClassName('concomment')[0].innerHTML;
+			lcl.lstcomid = data[0] ? data[0].comid : -1;
+			document.getElementsByClassName('writehere')[0].innerHTML ='';
+		}
+	}
+    
+	window.onload = function(){
+	    var url = window.location;
+	    var artid = url.pathname;
+		glb.submitanything('987/'+artid.split('/')[2],loadArt)
+	}
+
+	glb.submitanything = function (url,callback,method,data){
+		var xhttp = new XMLHttpRequest();
+	  	xhttp.onreadystatechange = function() {
+	    	if (this.readyState == 4 && this.status == 200) {
+	    		callback.call('',this.responseText)
+	  		}
+	  	};
+	  	method = method || 'GET';
+	  	xhttp.open(method,'http://satyabhushan.imad.hasura-app.io/'+url,true);
+     	xhttp.setRequestHeader('Content-type','application/json');
+	  	(data != undefined) ? xhttp.send( JSON.stringify(data) ) : xhttp.send();
+	}
+	
+	document.getElementsByClassName('writeresprev')[0].onclick = function(){
+		if(!glb.isloggedin()){
+			glb.shownoti('You are not sign in. First sign in.',2000,'y')
+			document.getElementById('uslogin').click();
+		}else{
+			this.style.display = 'none';
+			document.getElementsByClassName('writeres')[0].style.display = 'block';
+			document.getElementsByClassName('writehere')[0].focus();
+		}
+	}
+
+	var req = false;
+	document.getElementsByClassName('clicktopost')[0].onclick = function(){
+		if(!req){
+			req=false;
+			var tosend = document.getElementsByClassName('writehere')[0].innerHTML;
+			if(document.getElementsByClassName('writehere')[0].innerText.length > 1){
+				var lstcomid=document.getElementsByClassName('artcom') ? '-1' : document.getElementsByClassName('artcom')[0].getAttribute('data-comid');
+				data = {artid:global.artid,lstcomid:lcl.lstcomid,comment:tosend};
+				glb.submitanything('989',loadComm,'POST',data)
+			}else{
+				glb.shownoti('Comment must be alteast two word.',2000,'y');
+			}
+		}
+	}
+	var reql = false;
+	document.getElementById('likes').parentNode.onclick = function(){
+		if(!reql){
+			var reql = true;
+			if(!glb.isloggedin()){
+				glb.shownoti('You are not sign in. First sign in.',2000)
+				document.getElementById('uslogin').click();
+			}else{
+				glb.submitanything('990?artid='+global.artid,handelike)
+			}
+			var t=this;
+			if(lcl.liked == 'false'){
+				t.setAttribute('data-liked','true');
+				t.classList.add('midclass');
+				setTimeout(function(){t.classList.remove('midclass')},400);
+			}else{
+				t.setAttribute('data-liked','false');
+			}
+		}
+	}
+
+	function handelike(data){
+		req=false;
+		data = JSON.parse(data);
+		if(data.err){
+			glb.shownoti(data.errdes,2000,'y')
+		}else{
+			lcl.liked = data.mylk;
+			lcl.nol = data.nol;
+			glb.shownoti(data.errdes,2000)
+			document.getElementById('likes').innerText = lcl.nol;
+		}
+	}
+
+	document.getElementById('comments').parentNode.onclick = function(){
+		document.getElementsByClassName('writeresprev')[0].click();
+	}
+
+})();
+</script>
+<div class="overpg" style="position:fixed;height:calc(100% - 60px );width:100%;z-index;600z-index: 6;background: #ebebeb;top: 60px;;">
+    <div class="ldng"><ul class="loading"><li></li><li></li><li></li></ul></div>
+</div>
+
+<div class="loginform" style="position:fixed;height:calc(100% - 60px );width:100%;z-index;600z-index: 6;background: rgba(255,255,255,0.9);top: 60px; overflow: scroll;">
+    <div class="formclose" style="position:absolute; height:100%; width:100%; top:0; right:0"></div>
+    <div class="logninpro formsal">
+        <div class="formh">
+            <span>Login</span>
+            <div class="formclose" style="cursor:pointer; position:absolute;width: 20px;top: 50%;transform: translateY(-50%);right: 10px;fill: white;padding: 5px 10px;">
+                <svg version="1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M17.9 16L31.5 2.4c.5-.5.5-1.4 0-1.9s-1.4-.5-1.9 0L16 14.1 2.4.5c-.3-.3-.6-.4-1-.4C1.1.1.7.2.4.5 0 1 0 1.9.5 2.4L14.1 16 .5 29.6c-.5.5-.5 1.4 0 1.9s1.4.5 1.9 0L16 17.9l13.6 13.6c.5.5 1.4.5 1.9 0s.5-1.4 0-1.9L17.9 16z"/></svg>
+            </div>
+        </div>
+        <div class="mformpart">
+            <div class="fb-login" id="my-goog2" style="background: white;padding: 3px;border: 1px solid #ccc;">
+            	<div style="display: inline-block; height:100%; vertical-align: middle; position: relative;"><img src="https://lh3.googleusercontent.com/-qn7Hl_AXEOA/Vegu58jvBrI/AAAAAAAAAVA/RtkSABWWZsU/w800-h800/Google_icon_2015.png" style="height: 100%;"></div>
+            	<div style="display: inline-block;vertical-align: middle;width: calc( 100% - 41px );text-align: center;font-size: 17px;color: rgba(0,0,0,0.7);">Log in with Google</div>
+            </div>
+            <div class="fb-login" onclick="checkLoginState()">
+            	<div style="display: inline-block; height:100%; vertical-align: middle; position: relative;"><img src="https://s-media-cache-ak0.pinimg.com/736x/3f/40/7d/3f407dc965335257705ea112bb3a32ce.jpg" style="height: 100%;"></div>
+            	<div style="display: inline-block;vertical-align: middle;width: calc( 100% - 30px );text-align: center;font-size: 17px;">Log in with Facebook</div>
+            </div>
+            <div>
+                <div class="nopt">
+                    <span class="incenter">or</span>
+                </div>
+                <div>
+                    <form id="bkform1" action="#" method="post">
+                        <div><input type="text" class="ibtn usrnmlog" placeholder="Email id"></div>
+                        <div><input type="password" class="ibtn usrpsslog" placeholder="password"></div>
+                        <div><input type="submit" class="sbtn"></div>
+                    </form>
+                </div>
+                <div class="singupfirst intmvlogsign">New to <span style="font-family:'open sans';"></span><span style="color: #e83751;">Awesome</span><span style="color: #2f9bc7;">Blog</span></span>. Click here to Signup first.</div>
+            </div>
+        </div>
+    </div>
+    <div class="signuppro formsal">
+        <div class="formh">
+            <span>Sign up</span>
+            <div class="formclose" style="cursor:pointer; position:absolute;width: 20px;top: 50%;transform: translateY(-50%);right: 10px;fill: white;padding: 5px 10px;">
+                <svg version="1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M17.9 16L31.5 2.4c.5-.5.5-1.4 0-1.9s-1.4-.5-1.9 0L16 14.1 2.4.5c-.3-.3-.6-.4-1-.4C1.1.1.7.2.4.5 0 1 0 1.9.5 2.4L14.1 16 .5 29.6c-.5.5-.5 1.4 0 1.9s1.4.5 1.9 0L16 17.9l13.6 13.6c.5.5 1.4.5 1.9 0s.5-1.4 0-1.9L17.9 16z"/></svg>
+            </div>
+        </div>
+        <div class="mformpart">
+            <div class="fb-login" id="my-goog" style="background: white;padding: 3px;border: 1px solid #ccc;">
+            	<div style="display: inline-block; height:100%; vertical-align: middle; position: relative;"><img src="https://lh3.googleusercontent.com/-qn7Hl_AXEOA/Vegu58jvBrI/AAAAAAAAAVA/RtkSABWWZsU/w800-h800/Google_icon_2015.png" style="height: 100%;"></div>
+            	<div style="display: inline-block;vertical-align: middle;width: calc( 100% - 41px );text-align: center;font-size: 17px;color: rgba(0,0,0,0.7);">Log in with Google</div>
+            </div>
+            <div class="fb-login" onclick="checkLoginState()">
+            	<div style="display: inline-block; height:100%; vertical-align: middle; position: relative;"><img src="https://s-media-cache-ak0.pinimg.com/736x/3f/40/7d/3f407dc965335257705ea112bb3a32ce.jpg" style="height: 100%;"></div>
+            	<div style="display: inline-block;vertical-align: middle;width: calc( 100% - 30px );text-align: center;font-size: 17px;">Log in with Facebook</div>
+            	<!--<fb:login-button  scope="email" onlogin="checkLoginState();"></fb:login-button>-->
+            </div>
+            <div>
+                <div class="nopt">
+                    <span class="incenter">or</span>
+                </div>
+                <div>
+                    <form id="bkform2" action="#" method="post">
+                        <div><input type="text" class="ibtn usrnmsign" placeholder="Your Name"></div>
+                        <div><input type="text" class="ibtn usersignemail" placeholder="Email id"></div>
+                        <div><input type="password" class="ibtn usrpsssign" placeholder="Password"></div>
+                        <div><input type="password" class="ibtn usrrpsssign" placeholder="Retype Password"></div>
+                        <div><input type="submit" class="sbtn"></div>
+                    </form>
+                </div>
+                <div class="loginfirst intmvlogsign">Already have an account. Click here to login</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="uninoti" style="">
+    <div class="unitext">fsdfsdfsd</div>
+    <div class="uniclose">
+    	<svg version="1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" style="position: relative; top: -8px;"><path d="M17.9 16L31.5 2.4c.5-.5.5-1.4 0-1.9s-1.4-.5-1.9 0L16 14.1 2.4.5c-.3-.3-.6-.4-1-.4C1.1.1.7.2.4.5 0 1 0 1.9.5 2.4L14.1 16 .5 29.6c-.5.5-.5 1.4 0 1.9s1.4.5 1.9 0L16 17.9l13.6 13.6c.5.5 1.4.5 1.9 0s.5-1.4 0-1.9L17.9 16z"/></svg>
+    </div>
+</div>
+
+<script src="http://satyabhushan.imad.hasura-app.io/javascripts/login-sign-form.js"></script>
+<script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+</body>
+</html>
+
+
+ 
