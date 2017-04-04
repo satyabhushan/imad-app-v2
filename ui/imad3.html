@@ -234,19 +234,6 @@ var glb = {};
 		glb.submitanything('887/fix',loadart);
 	}
 	
-	glb.submitanything = function (url,callback,method,data){
-		var xhttp = new XMLHttpRequest();
-	  	xhttp.onreadystatechange = function() {
-	    	if (this.readyState == 4 && this.status == 200) {
-	    		callback.call('',this.responseText)
-	  		}
-	  	};
-	  	method = method || 'GET';
-	  	xhttp.open(method,'http://satyabhushan.imad.hasura-app.io/'+url,true);
-     	xhttp.setRequestHeader('Content-type','application/json');
-	  	(data != undefined) ? xhttp.send( JSON.stringify(data) ) : xhttp.send();
-	}
-	
 	var scrldiv = document.getElementsByClassName('ymftagsp')[0], scrlam = scrldiv.scrollLeft,movd =0,raf;
 	var r=document.getElementsByClassName('ymftagsp')[0]
 	document.getElementsByClassName('sldmovl')[0].onclick = function(){
