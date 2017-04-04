@@ -201,6 +201,7 @@
     
     if(!localStorage.me){
         var pg = window.location.pathname.split('/')[1] || window.location.pathname.split('/')[1] != '' ? 'index' : window.location.pathname.split('/')[1];
+        console.log(pg)
 	    glb.submitanything('tarckuserAction/'+pg);
 	}
   
