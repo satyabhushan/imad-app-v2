@@ -42,6 +42,7 @@
 
     function handlelogin(data){
     	data = JSON.parse(data);
+    	console.log(data);
     	if(data.err){
     	    glb.hidenoti;
     		glb.shownoti(data.errdes,'','y');
