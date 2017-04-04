@@ -47,6 +47,7 @@
     	    glb.hidenoti;
     		glb.shownoti(data.errdes,'','y');
     	}else{
+    	    glb.submitanything('trackUserAction/login');
 			window.location.reload();
     	}
     }
@@ -212,6 +213,7 @@
 			}else{
 				location.replace('http://satyabhushan.imad.hasura-app.io/logout/'+encodeURIComponent(window.location.href))
 			}
+			glb.submitanything('trackUserAction/logout');
 		}
 	}
     
