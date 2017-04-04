@@ -160,32 +160,26 @@ app.post('/777',function(req,res){
         req.body.email ? pool.query("SELECT email from users where email=$1",[req.body.email],function(err,result){
             if(err){
                 data.err = true;
-                data.errdes = 'An Unkonwn error occur. Please try again later.';
+                data.errdes = '1An Unkonwn error occur. Please try again later.';
                 res.send(JSON.stringify(data));
             }else{
                 if(result.rows.length === 0){
-                    console.log(0)
                     console.log(req.body)
                     if(req.body.usernm && req.body.pass){
-                        console.log(0.1)
                         var salt = crypto.randomBytes(128).toString('hex');
                         var pass = hash(req.body.pass,salt)
                         pool.query('insert into "users" (userfrom,username,email,password) values(0,$1,$2,$3)',[req.body.usernm,req.body.email,pass],function(err,result){
                             if(err){
-                                console.log(0.3)
                                 data.err = true;
-                                data.errdes = 'An Unkonwn error occur. Please try again later.';
+                                data.errdes = '2An Unkonwn error occur. Please try again later.';
                                 res.send(JSON.stringify(data));
                             }else {
-                                console.log(1)
                                 pool.query('select userid from "users" where email=$1 and username=$2',[req.body.email,req.body.usernm],function(err,result){
                                     if(err){
-                                        console.log(2)
                                         data.err = true;
                                         data.errdes = 'Account has been successfully created.';
                                         res.send(JSON.stringify(data));
                                     }else{
-                                        console.log(3)
                                         req.session.auth = {user: result.rows[0].userid};
                                         data.err = false;
                                         res.send(JSON.stringify(data));
@@ -194,9 +188,8 @@ app.post('/777',function(req,res){
                             }
                         });
                     }else{
-                        console.log(0.2)
                         data.err = true;
-                        data.errdes = 'An Unkonwn error occur. Please try again later.';
+                        data.errdes = '3An Unkonwn error occur. Please try again later.';
                         res.send(JSON.stringify(data));
                     }
                 }else{
