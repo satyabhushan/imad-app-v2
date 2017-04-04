@@ -198,15 +198,13 @@
 })()
 
 
-
 window.fbAsyncInit = function() {
 	FB.init({
-		appId      : '1809184629324080',
+		appId      : '1340734889294057',
 		xfbml      : true,
 		version    : 'v2.6'
 	});
 };
-
 (function(d, s, id){
 	var js, fjs = d.getElementsByTagName(s)[0];
 	if (d.getElementById(id)) {return;}
@@ -214,7 +212,6 @@ window.fbAsyncInit = function() {
 	js.src = "//connect.facebook.net/en_US/sdk.js";
 	fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
-
 function checkLoginState() {
 	FB.login(function(response) {
 	    if(response.status =="connected"){
@@ -225,28 +222,25 @@ function checkLoginState() {
 	    return_scopes: true
 	});
 }
-
 var googleUser = {};
 var startApp = function() {
 	gapi.load('auth2', function(){
 		auth2 = gapi.auth2.init({
-			client_id: '729153533919-tqdq8hqr78dt8p2a1rmpgm3vec6j9nfj.apps.googleusercontent.com',
+			client_id: '6592700229-sq2acbb8tqqgehqm8agvmrp5io4gj1u5.apps.googleusercontent.com',
 			cookiepolicy: 'single_host_origin',
 		});
 		attachSignin(document.getElementById('my-goog'));
 	});
 };
-
 var startApp2 = function() {
 	gapi.load('auth2', function(){
 		auth2 = gapi.auth2.init({
-			client_id: '729153533919-tqdq8hqr78dt8p2a1rmpgm3vec6j9nfj.apps.googleusercontent.com',
+			client_id: '6592700229-sq2acbb8tqqgehqm8agvmrp5io4gj1u5.apps.googleusercontent.com',
 			cookiepolicy: 'single_host_origin',
 		});
 		attachSignin(document.getElementById('my-goog2'));
 	});
 };
-
 function attachSignin(element) {
 	auth2.attachClickHandler(element, {},
 		function(googleUser) {
