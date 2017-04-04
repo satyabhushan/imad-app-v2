@@ -369,38 +369,44 @@ app.get('/987/:id',function(req,res){
     pool.query("SELECT * from articles where artid = "+artid,function(err,result){
        if(err){
            res.status(500).send(err.toString());
+           data = { err:'404', errdata: errordata(404)};
+            isloggedin(req,res,data);
        } else{
            if(result.rows.length === 0){
-               res.status(404).send(err.toString('ARTICLE NOT FOUND'));
+               data = { err:'404', errdata: errordata(404)};
+               isloggedin(req,res,data);
            }else{
                var artdet = result.rows[0];
                pool.query("SELECT c.tagid as tagid,c.tagname as tagname,c.tagimg as tagimg FROM articles a left JOIN tagscon b ON a.artid = b.tagartid left JOIN tags c on b.tagid=c.tagid where a.artid = "+artid,function(err,result){
                    if(err){
-                           res.status(500).send(err.toString());
+                           data = { err:'404', errdata: errordata(404)};
+                            isloggedin(req,res,data);
                    }else{
                         artdet.tags = result.rows;
                         pool.query("SELECT count(a.comartid) as noc from comments a where a.comartid = "+artid,function(err,result){
                            if(err){
-                               res.status(500).send(err.toString());
+                               data = { err:'404', errdata: errordata(404)};
+                                isloggedin(req,res,data);
                            }else{
                                 artdet.noofcomments = result.rows[0].noc;
                                 pool.query("SELECT count(a.artid) as nol from likes a where a.artid = "+artid,function(err,result){
                                     if(err){
-                                       res.status(500).send(err.toString());
+                                       data = { err:'404', errdata: errordata(404)};
+                                        isloggedin(req,res,data);
                                     }else{
                                         artdet.nooflikes = result.rows[0].nol;
                                         if(islogin(req)){
                                             var user = req.session.auth.user;
                                             pool.query("SELECT * from likes a where a.artid = "+artid+" and a.userid="+user,function(err,result){
                                                 if(err){
-                                                    console.log(err);
-                                                   res.status(500).send(err.toString());
+                                                    data = { err:'404', errdata: errordata(404)};
+                                                    isloggedin(req,res,data);
                                                 }else{
                                                     var mylk = result.rows.length == 1 ? 'true' : 'false'; 
                                                     pool.query("SELECT * from comments a where a.comartid = "+artid+" and a.comuserid="+user,function(err,result){
                                                         if(err){
-                                                            console.log(err);
-                                                           res.status(500).send(err.toString());
+                                                            data = { err:'404', errdata: errordata(404)};
+                                                            isloggedin(req,res,data);
                                                         }else{
                                                             var mycom = result.rows.length >= 1 ? 'true' : 'false';
                                                             artdet.mylk = mylk;
