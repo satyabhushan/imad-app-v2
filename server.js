@@ -174,12 +174,15 @@ app.post('/777',function(req,res){
                                 data.errdes = 'An Unkonwn error occur. Please try again later.';
                                 res.send(JSON.stringify(data));
                             }else {
+                                console.log(1)
                                 pool.query('select userid from "users" where email=$1 and username=$2',[req.body.email,req.body.usernm],function(err,result){
                                     if(err){
+                                        console.log(2)
                                         data.err = true;
                                         data.errdes = 'Account has been successfully created.';
                                         res.send(JSON.stringify(data));
                                     }else{
+                                        console.log(3)
                                         req.session.auth = {user: result.rows[0].userid};
                                         data.err = false;
                                         res.send(JSON.stringify(data));
