@@ -69,7 +69,7 @@ app.get('/trackUserAction/:url',function(req,res){
     console.log(req.connection.remoteAddress);
     var url = req.params.url;
     if(req.connection.remoteAddress){
-        pool.query('Select * from "visiters" where visitersIP = $1',[req.connection.remoteAddress],function(err,result){
+        pool.query('Select * from "visiters" where userip = $1',[req.connection.remoteAddress],function(err,result){
             if(err){
                 console.log(err);
             }else{
