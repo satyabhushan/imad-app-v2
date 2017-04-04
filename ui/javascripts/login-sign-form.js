@@ -175,22 +175,22 @@
 					FB.getLoginStatus(function(r){
 						if(r.status=="connected"){
 							FB.logout(function(response){
-								location.replace('http://localhost:3000/logout/'+encodeURIComponent(window.location.href))
+								location.replace('http://satyabhushan.imad.hasura-app.io/logout/'+encodeURIComponent(window.location.href))
 							})
 						}else{
-							location.replace('http://localhost:3000/logout/'+encodeURIComponent(window.location.href))
+							location.replace('http://satyabhushan.imad.hasura-app.io/logout/'+encodeURIComponent(window.location.href))
 						}
 					})
 				}else{
-					location.replace('http://localhost:3000/logout/'+encodeURIComponent(window.location.href))
+					location.replace('http://satyabhushan.imad.hasura-app.io/logout/'+encodeURIComponent(window.location.href))
 				}
 			}else if(webid == 1 ){
 				var auth2 = gapi.auth2.getAuthInstance();
 			    auth2.signOut().then(function () {
-			      	location.replace('http://localhost:3000/logout/'+encodeURIComponent(window.location.href))
+			      	location.replace('http://satyabhushan.imad.hasura-app.io/logout/'+encodeURIComponent(window.location.href))
 			    });
 			}else{
-				location.replace('http://localhost:3000/logout/'+encodeURIComponent(window.location.href))
+				location.replace('http://satyabhushan.imad.hasura-app.io/logout/'+encodeURIComponent(window.location.href))
 			}
 		}
 	}
