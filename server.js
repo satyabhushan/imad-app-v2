@@ -164,11 +164,9 @@ app.post('/777',function(req,res){
                 res.send(JSON.stringify(data));
             }else{
                 if(result.rows.length === 0){
-                    console.log(req.body)
                     if(req.body.usernm && req.body.pass){
                         var salt = crypto.randomBytes(128).toString('hex');
                         var pass = hash(req.body.pass,salt)
-                        console.log(5)
                         pool.query('insert into "users" (userfrom,username,email,password) values(0,$1,$2,$3)',[req.body.usernm,req.body.email,pass],function(err,result){
                             if(err){
                                 data.err = true;
