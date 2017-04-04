@@ -94,6 +94,7 @@
 				if(req=true){
 					req=false;
 					glb.submitanything('776',handlelogin,'POST',{webid:0,email:data.usrnm,pass:data.pass});
+					glb.shownoti('Submitting...',10000,'n');
 				}
 			}
 		}
