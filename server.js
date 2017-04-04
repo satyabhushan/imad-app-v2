@@ -168,10 +168,11 @@ app.post('/777',function(req,res){
                     if(req.body.usernm && req.body.pass){
                         var salt = crypto.randomBytes(128).toString('hex');
                         var pass = hash(req.body.pass,salt)
+                        console.log(5)
                         pool.query('insert into "users" (userfrom,username,email,password) values(0,$1,$2,$3)',[req.body.usernm,req.body.email,pass],function(err,result){
                             if(err){
                                 data.err = true;
-                                data.errdes = '2An Unkonwn error occur. Please try again later.';
+                                data.errdes = 'An Unkonwn error occur. Please try again later.';
                                 res.send(JSON.stringify(data));
                             }else {
                                 pool.query('select userid from "users" where email=$1 and username=$2',[req.body.email,req.body.usernm],function(err,result){
