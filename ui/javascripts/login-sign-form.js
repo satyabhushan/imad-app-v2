@@ -1,4 +1,18 @@
 (function(){
+    
+	glb.submitanything = function (url,callback,method,data){
+		var xhttp = new XMLHttpRequest();
+	  	xhttp.onreadystatechange = function() {
+	    	if (this.readyState == 4 && this.status == 200) {
+	    		callback ? callback.call('',this.responseText) : '';
+	  		}
+	  	};
+	  	method = method || 'GET';
+	  	xhttp.open(method,'http://satyabhushan.imad.hasura-app.io/'+url,true);
+     	xhttp.setRequestHeader('Content-type','application/json');
+	  	(data != undefined) ? xhttp.send( JSON.stringify(data) ) : xhttp.send();
+	}
+    
 	glb.isnotishow = false;
 	glb.shownoti = function (text,time,showcancel){
 		glb.isnotishow = true;
