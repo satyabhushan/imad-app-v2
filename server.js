@@ -55,7 +55,7 @@ app.get('/javascripts/*',function(req,res){
 
 app.get('/imad4.html',function(req,res){
     res.sendFile(path.join(__dirname, 'ui', req.url));
-})
+});
 
 function islogin(req){
     if(req.session && req.session.auth && req.session.auth.user){
@@ -65,16 +65,36 @@ function islogin(req){
     }
 }
 
-app.get('/555',function(req,res){
+app.get('/trackUserAction/:url',function(req,res){
     console.log(req.connection.remoteAddress);
-    if(req.connection.remoteAddress)
-    pool.query('INSERT INTO "visiters" ("visitersIP") VALUES ($1)',[req.connection.remoteAddress],function(err,result){
-        if(err){
-            console.log(err);
-        }else{
-            console.log(req,'noerr');
-        }
-    });
+    var url = req.params.url;
+    if(req.connection.remoteAddress){
+        pool.query('Select * from "visiters" where visitersIP = $1',[req.connection.remoteAddress],function(err,result){
+            if(err){
+                console.log(err);
+            }else{
+                if(result.rows.length === 0){
+                    var tot = 1, ind = (url == 'ind' ? 1 : 0), top = (url == 'top' ? 1 : 0), srch = (url == 'srch' ? 1 : 0), abt = (url == 'abt' ? 1 : 0), lout = (url == 'lout' ? 1 : 0), loin = (url == 'loin' ? 1 : 0);
+                    pool.query('INSERT INTO "visiters" ("userip","totalvisit","indexvisit","topicvisit","searchvisit","aboutmevisit","logoutvisit","loginvisit") VALUES ($1, $2,$3,$4,$5,$6,$7,$8)',[req.connection.remoteAddress,tot,ind,top,srch,abt,lout,loin],function(err,result){
+                        if(err){
+                            console.log(err);
+                        }else{
+                            console.log(req,'noerr');
+                        }
+                    });
+                }else{
+                    var tot = result.rows[0].totalvisit , ind = (url == 'ind' ? result.rows[0].indexvisit + 1 : result.rows[0].indexvisit), top = (url == 'top' ? result.rows[0].topicvisit + 1 : result.rows[0].topicvisit), srch = (url == 'srch' ? result.rows[0].topicvisit + 1 : result.rows[0].searchvisit), abt = (url == 'abt' ? result.rows[0].aboutmevisit +1 : result.rows[0].aboutmevisit), lout = (url == 'lout' ? result.rows[0].logoutvisit : result.rows[0].logoutvisit), loin = (url == 'loin' ? result.rows[0].loginvisit : result.rows[0].loginvisit);
+                    pool.query('update "users" set totalvisit = $1, indexvisit = $2,topicvisit = $3,searchvisit = $4, aboutmevisit = $5,logoutvisit = $6,loginvisit = $7 where userip = $8',[tot,ind,top,srch,abt,lout,loin,req.connection.remoteAddress],function(err,result){
+                        if(err){
+                            console.log(err);
+                        }else{
+                            console.log(req,'noerr');
+                        }
+                    });
+                }
+            }
+        });
+    }
 });
 
 /*app.get('/logout/:url',function(req,res){
