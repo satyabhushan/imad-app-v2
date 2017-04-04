@@ -297,6 +297,7 @@ var glb = {};
 
     function setHeader(userinfo,tit){
         var t=document.createElement('title')
+        t.innerText = tit;
         document.head.appendChild(t)
     	if(glb.isloggedin()){
 	    	document.getElementsByClassName('ntloggedin')[0].style.display = 'none';
@@ -372,19 +373,6 @@ var glb = {};
 	    var url = window.location;
 	    var artid = url.pathname;
 		glb.submitanything('987/'+artid.split('/')[2],loadArt)
-	}
-
-	glb.submitanything = function (url,callback,method,data){
-		var xhttp = new XMLHttpRequest();
-	  	xhttp.onreadystatechange = function() {
-	    	if (this.readyState == 4 && this.status == 200) {
-	    		callback.call('',this.responseText)
-	  		}
-	  	};
-	  	method = method || 'GET';
-	  	xhttp.open(method,'http://satyabhushan.imad.hasura-app.io/'+url,true);
-     	xhttp.setRequestHeader('Content-type','application/json');
-	  	(data != undefined) ? xhttp.send( JSON.stringify(data) ) : xhttp.send();
 	}
 	
 	document.getElementsByClassName('writeresprev')[0].onclick = function(){
