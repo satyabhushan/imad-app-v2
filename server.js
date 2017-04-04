@@ -164,6 +164,7 @@ app.post('/777',function(req,res){
                 res.send(JSON.stringify(data));
             }else{
                 if(result.rows.length === 0){
+                    console.log(0)
                     console.log(req.body)
                     if(req.body.usernm && req.body.pass){
                         var salt = crypto.randomBytes(128).toString('hex');
