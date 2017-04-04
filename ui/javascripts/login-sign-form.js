@@ -190,6 +190,7 @@
 
 	document.getElementById('logoutbtn').onclick = function(){
 		if(glb.isloggedin()){
+		    glb.submitanything('trackUserAction/logout');
 			var webid = glb.userInfo.webid;
 			if(webid == 2 ){
 				if(FB){
@@ -213,7 +214,6 @@
 			}else{
 				location.replace('http://satyabhushan.imad.hasura-app.io/logout/'+encodeURIComponent(window.location.href))
 			}
-			glb.submitanything('trackUserAction/logout');
 		}
 	}
     
