@@ -73,7 +73,6 @@ $(document).ready(function(){
     $.ajax({
         type: "GET",
         url: "http://satyabhushan.imad.hasura-app.io/trackUserAction/aboutme",
-        data: formdata,
         success: function (data) {            
             console.log(data)
         },error: function(data){
