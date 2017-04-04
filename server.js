@@ -80,7 +80,8 @@ app.get('/trackUserAction/:url',function(req,res){
                         if(err){
                             console.log(err);
                         }else{
-                            console.log(req,'noerr');
+                            console.log('noerr');
+                            res.send('fds');
                         }
                     });
                 }else{
@@ -89,7 +90,8 @@ app.get('/trackUserAction/:url',function(req,res){
                         if(err){
                             console.log(err);
                         }else{
-                            console.log(req,'noerr');
+                            console.log('noerr');
+                            res.send('fsd');
                         }
                     });
                 }
