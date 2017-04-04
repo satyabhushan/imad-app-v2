@@ -29,8 +29,8 @@ var pool = new Pool(config);
 
 function hash(inputstring,salt)
 {
-    var hashed=crypto.pbkdf2Sync(inputstring,salt, 100000, 512, 'sha512');
-    return ["pbkdf2","10000",salt,hashed.toString('hex')].join('$');
+    var hashed=crypto.pbkdf2Sync(inputstring,salt, 100, 512, 'sha512');
+    return ["pbkdf2","100",salt,hashed.toString('hex')].join('$');
 }
 
 app.get('/', function (req, res) {
