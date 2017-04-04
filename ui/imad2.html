@@ -295,7 +295,9 @@ var glb = {};
         return loggedin;
     }
 
-    function setHeader(userinfo){
+    function setHeader(userinfo,tit){
+        var t=document.createElement('title')
+        document.head.appendChild(t)
     	if(glb.isloggedin()){
 	    	document.getElementsByClassName('ntloggedin')[0].style.display = 'none';
     		document.getElementsByClassName('ifloggedin')[0].style.display = 'block';
@@ -313,9 +315,9 @@ var glb = {};
         data = JSON.parse(data);
         loggedin = data.meta.loggedin;
         glb.userInfo = data.meta.userInfo;
-        setHeader(glb.userInfo);
         data = data.otherdata;
         if(!data.err){
+            setHeader(glb.userInfo,data.arttit);
 		    global.artid=data.artid;
 		    document.getElementsByClassName('arttit')[0].innerHTML = data.arttit;
 		    var f = document.createElement('div');
@@ -341,6 +343,7 @@ var glb = {};
 	        var m=document.getElementsByClassName('overpg')[0];
 	        m.style.display='none';
    	 	}else{
+   	 	    setHeader(glb.userInfo,'404 | Page not found');
    	 		document.getElementsByClassName('overpg')[0].innerHTML = data.errdata
     	}
 	}
