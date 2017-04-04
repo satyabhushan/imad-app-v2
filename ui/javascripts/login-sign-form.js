@@ -29,7 +29,7 @@
     function handlelogin(data){
     	data = JSON.parse(data);
     	if(data.err){
-    	    $('.overpg').css('display','none');
+    	    glb.hidenoti;
     		glb.shownoti(data.errdes,'','y');
     	}else{
 			window.location.reload();
@@ -47,7 +47,7 @@
 			     	sendata.webid = 0;
 			     	sendata.pass = data.pass;
 			     	glb.submitanything('777',handlelogin,'POST',sendata);
-			     	$('.overpg').css('display','block');
+			     	glb.shownoti('Submitting...',10000,'n');
 		     	}
 			}else if(webid === 1){
 				if (auth2.isSignedIn.get()) {
@@ -58,7 +58,7 @@
 					sendata.email = profile.getEmail();
 					sendata.webid = 1;
 			     	glb.submitanything('777',handlelogin,'POST',sendata);
-			     	$('.overpg').css('display','block');
+			     	glb.shownoti('Submitting...',10000,'n');
 				}else{
 					
 				}
@@ -72,8 +72,7 @@
 				     	sendata.picture = response.picture.data.url;
 				     	sendata.userwebid = response.id;
 				     	glb.submitanything('777',handlelogin,'POST',sendata);
-				     	//glb.shownoti('Password is matching','','y');
-				     	$('.overpg').css('display','block');
+				     	glb.shownoti('Submitting...',10000,'n');
 					}
 			    }) : '';
 			}else if(webid === 3){
