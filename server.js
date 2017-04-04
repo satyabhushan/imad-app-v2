@@ -66,7 +66,6 @@ function islogin(req){
 }
 
 app.get('/trackUserAction/:url',function(req,res){
-    console.log(req.connection.remoteAddress,  req.headers['x-forwarded-for'] );
     var url = req.params.url;
     var ip =  req.headers['x-forwarded-for'] 
     if(ip){
@@ -86,7 +85,7 @@ app.get('/trackUserAction/:url',function(req,res){
                     });
                 }else{
                     var tot = result.rows[0].totalvisit , ind = (url == 'index' ? result.rows[0].indexvisit + 1 : result.rows[0].indexvisit), top = (url == 'topic' ? result.rows[0].topicvisit + 1 : result.rows[0].topicvisit), srch = (url == 'search' ? result.rows[0].topicvisit + 1 : result.rows[0].searchvisit), abt = (url == 'aboutme' ? result.rows[0].aboutmevisit +1 : result.rows[0].aboutmevisit), lout = (url == 'logout' ? result.rows[0].logoutvisit : result.rows[0].logoutvisit), loin = (url == 'login' ? result.rows[0].loginvisit : result.rows[0].loginvisit);
-                    pool.query('update "users" set totalvisit = $1, indexvisit = $2,topicvisit = $3,searchvisit = $4, aboutmevisit = $5,logoutvisit = $6,loginvisit = $7 where userip = $8',[tot,ind,top,srch,abt,lout,loin,ip],function(err,result){
+                    pool.query('update "visiters" set totalvisit = $1, indexvisit = $2,topicvisit = $3,searchvisit = $4, aboutmevisit = $5,logoutvisit = $6,loginvisit = $7 where userip = $8',[tot,ind,top,srch,abt,lout,loin,ip],function(err,result){
                         if(err){
                             console.log(err);
                         }else{
