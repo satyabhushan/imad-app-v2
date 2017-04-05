@@ -71,13 +71,13 @@ app.get('/trackUserAction/:url',function(req,res){
     if(ip){
         pool.query('Select * from "visiters" where userip = $1',[ip],function(err,result){
             if(err){
-                console.log(err);
+                console.log('err');
             }else{
                 if(result.rows.length === 0){
                     var tot = 1, ind = (url == 'index' ? 1 : 0), top = (url == 'topic' ? 1 : 0), srch = (url == 'search' ? 1 : 0), abt = (url == 'aboutme' ? 1 : 0), lout = (url == 'logout' ? 1 : 0), loin = (url == 'login' ? 1 : 0);
                     pool.query('INSERT INTO "visiters" ("userip","totalvisit","indexvisit","topicvisit","searchvisit","aboutmevisit","logoutvisit","loginvisit") VALUES ($1, $2,$3,$4,$5,$6,$7,$8)',[ip,tot,ind,top,srch,abt,lout,loin],function(err,result){
                         if(err){
-                            console.log(err);
+                            console.log('err');
                         }else{
                             console.log('noerr');
                             res.send('fds');
@@ -87,7 +87,7 @@ app.get('/trackUserAction/:url',function(req,res){
                     var tot = result.rows[0].totalvisit +1, ind = (url == 'index' ? result.rows[0].indexvisit + 1 : result.rows[0].indexvisit), top = (url == 'topic' ? result.rows[0].topicvisit + 1 : result.rows[0].topicvisit), srch = (url == 'search' ? result.rows[0].searchvisit + 1 : result.rows[0].searchvisit), abt = (url == 'aboutme' ? result.rows[0].aboutmevisit +1 : result.rows[0].aboutmevisit), lout = (url == 'logout' ? result.rows[0].logoutvisit +1 : result.rows[0].logoutvisit), loin = (url == 'login' ? result.rows[0].loginvisit+1 : result.rows[0].loginvisit);
                     pool.query('update "visiters" set totalvisit = $1, indexvisit = $2,topicvisit = $3,searchvisit = $4, aboutmevisit = $5,logoutvisit = $6,loginvisit = $7 where userip = $8',[tot,ind,top,srch,abt,lout,loin,ip],function(err,result){
                         if(err){
-                            console.log(err);
+                            console.log('err');
                         }else{
                             console.log('noerr');
                             res.send('fsd');
@@ -280,7 +280,6 @@ app.post('/776',function(req,res){
                         var dbpass = result.rows[0].password;
                         var inpass = req.body.pass;
                         var salt = dbpass.split('$')[2];
-                        console.log(inpass,salt)
                         var haspass = hash(inpass,salt);
                         if(haspass == dbpass){
                             req.session.auth = {user: result.rows[0].userid};
@@ -310,7 +309,6 @@ app.get('/886/:id',function(req,res){
     var data = {},
         tagid = req.params.id,
         usrid;
-        console.log(tagid)
     if( islogin(req) ){
         usrid = req.session.auth.user;
         pool.query('insert into usrflwngtg(userid,tagid) select $1, tagid from tags a where a.tagid=$2 and a.tagid not in (select b.tagid from usrflwngtg b where b.userid=$3)',[usrid,tagid,usrid],function(err,result){
@@ -334,7 +332,7 @@ app.get('/886/:id',function(req,res){
 app.get('/887/:id',function(req,res){
     pool.query("select a.artid,a.arttit,a.arttit,a.artdes,d.tagid,d.tagimg,d.tagname from articles a inner join tagscon b on a.artid = b.tagartid "+ (islogin(req) ? " inner join usrflwngtg c on b.tagid  = c.tagid and c.userid = "+req.session.auth.user+" left join tags d on d.tagid=b.tagid" : " left join tags d on d.tagid=b.tagid where b.tagid = 1 or b.tagid = 2 or b.tagid = 8 or b.tagid = 6 ")+" ORDER by random()",function(err,result){
         if(err){
-            console.log(err);
+            console.log('err');
             res.status(500).send(err.toString());
         }else{
             var data=[],check=[],ind=-1,nol,noc;
@@ -350,7 +348,7 @@ app.get('/887/:id',function(req,res){
 
             pool.query("select * from tags t "+ (islogin(req) ? "where not exists (select 1 from usrflwngtg Where t.tagid=tagid and userid="+req.session.auth.user+")" : "")+ " ORDER BY RANDOM() limit 5",function(err,result){
                 if(err){
-                    console.log(err);
+                    console.log('err');
                     res.status(500).send(err.toString());
                 }else{
                     data = { arts: data,kftags: result.rows };
@@ -409,14 +407,12 @@ app.get('/987/:id',function(req,res){
                                                             var mycom = result.rows.length >= 1 ? 'true' : 'false';
                                                             artdet.mylk = mylk;
                                                             artdet.mycom = mycom;
-                                                            console.log(artdet,1);
                                                             isloggedin(req,res,artdet);
                                                         }
                                                     });
                                                 }
                                             });
                                         }else{
-                                            console.log(artdet,2);
                                             isloggedin(req,res,artdet);
                                         }
                                        //artdet = { meta : isloggedin(req), otherdata: artdet };
@@ -442,11 +438,9 @@ app.get('/988',function(req,res){
             data.errdes = 'Sorry! You can not follow. First you need to login.';
             res.send(JSON.stringify(data));       
         } else{
-            console.log(result.rows)
             data.err = false;
             data.errdes = 'Done';
             data.otherdata = result.rows;
-            console.log(data.otherdata)
             res.send(JSON.stringify(data)); 
        }
     });
@@ -512,7 +506,6 @@ app.get('/990',function(req,res){
         var user = req.session.auth.user;
         pool.query("SELECT * from likes a where a.artid = "+artid,function(err,result){
             if(err){
-                console.log(err);
                 data.err = true;
                 data.errdes = '1An unknown error occur.';
                 res.send(JSON.stringify(data));       
@@ -573,14 +566,11 @@ app.get('/topicwise/:id',function(req,res){
     data = {};
     pool.query("select tagid from tags where tagname=$1",[tagid],function(err,result){
         if(err){
-            console.log(err);
             res.status(500).send(err.toString());
         }else{
-            console.log(result)
             if(result.rows.length != 0){
                 pool.query("select a.artid,a.arttit,a.arttit,a.artdes,d.tagid,d.tagimg,d.tagname from articles a inner join tagscon b on a.artid = b.tagartid left join tags d on d.tagid=b.tagid where b.tagid = "+result.rows[0].tagid+" ORDER by random()",function(err,result){
                     if(err){
-                        console.log(err);
                         res.status(500).send(err.toString());
                     }else{
                         var data=[],check=[],ind=-1,nol,noc;
